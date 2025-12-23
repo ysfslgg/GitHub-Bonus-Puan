@@ -3,7 +3,7 @@
 
 // İsim SOYİSİM: [M.Yusuf Silgu]
 // Öğrenci Numarası: [2420161086]
-// BTK Akademi Sertifika Bağlantısı: [Sertifika bu depoya (repository) "sertifika.pdf" adıyla yüklenmiştir.]
+// BTK Akademi Sertifika Bağlantısı: https://github.com/ysfslgg/GitHub-Bonus-Puan/blob/main/sertifika.pdf
 
 // Seçmeli Sıralama (Selection Sort) Algoritması
 void secmeliSiralama(int dizi[], int n) {
