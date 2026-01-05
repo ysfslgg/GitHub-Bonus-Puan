@@ -1,76 +1,76 @@
 #include <stdio.h>
-#include <locale.h>
 
-// İsim SOYİSİM: [M.Yusuf Silgu]
-// Öğrenci Numarası: [2420161086]
-// BTK Akademi Sertifika Bağlantısı: https://github.com/ysfslgg/GitHub-Bonus-Puan/blob/main/sertifika.pdf
+void dizi_yazdir(int dizi[], int BOYUT) {
+    int i;
+    for (i = 0; i < BOYUT; i++) {
+        printf("%3d", dizi[i]);
+    }
+    printf("\n");
+}
 
-// Seçmeli Sıralama (Selection Sort) Algoritması
-void secmeliSiralama(int dizi[], int n) {
-    int i, j, min_indis, gecici;
-    for (i = 0; i < n - 1; i++) {
-        min_indis = i;
-        for (j = i + 1; j < n; j++) {
-            if (dizi[j] < dizi[min_indis]) {
-                min_indis = j;
+void takas(int *ap, int *bp) {
+    int gecici = *ap;
+    *ap = *bp;
+    *bp = gecici;
+}
+
+void baloncuk_sirala(int dizi[], int BOYUT) {
+    int i, j;
+    for (i = 1; i < BOYUT; i++) {
+        for (j = 0; j < BOYUT - 1; j++) {
+            if (dizi[j] > dizi[j + 1]) {
+                takas(&dizi[j], &dizi[j + 1]);
             }
         }
-        // Küçük olan elemanı uygun yere taşı (Yer değiştirme)
-        gecici = dizi[min_indis];
-        dizi[min_indis] = dizi[i];
-        dizi[i] = gecici;
     }
 }
 
-// İkili Arama (Binary Search) Algoritması
-int ikiliArama(int dizi[], int sol, int sag, int aranan) {
+// --- İkili Arama (Binary Search) Fonksiyonu ---
+int ikili_arama(int dizi[], int BOYUT, int aranan) {
+    int sol = 0;
+    int sag = BOYUT - 1;
+
     while (sol <= sag) {
-        int orta = sol + (sag - sol) / 2;
+        int orta = sol + (sag - sol) / 2; // Taşmayı önlemek için bu formül kullanılır
 
         // Sayı ortada mı?
         if (dizi[orta] == aranan)
-            return orta;
+            return orta; // Bulunduysa indeks döner
 
-        // Sayı ortadakinden büyükse sol tarafı ele
+        // Sayı büyükse sol tarafı ele (sağa bak)
         if (dizi[orta] < aranan)
             sol = orta + 1;
-        // Sayı ortadakinden küçükse sağ tarafı ele
+        
+        // Sayı küçükse sağ tarafı ele (sola bak)
         else
             sag = orta - 1;
     }
-    // Sayı bulunamadıysa -1 döndür
-    return -1;
+
+    return -1; // Sayı bulunamadıysa -1 döner
 }
 
 int main() {
-    // Türkçe karakter desteği (Terminal için)
-    setlocale(LC_ALL, "Turkish");
+    int A[] = {12, 47, 55, 8, 7, 15, 3, 99, 25, 32};
+    int N = sizeof(A) / sizeof(A[0]);
+    int aranan_sayi, sonuc;
 
-    int sayilar[] = {64, 25, 12, 22, 11, 90, 45};
-    int boyut = sizeof(sayilar) / sizeof(sayilar[0]);
-    int arananSayi, sonuc;
+    printf("Orijinal dizi: ");
+    dizi_yazdir(A, N);
 
-    printf("--- SIRALAMA VE ARAMA PROGRAMI ---\n\n");
-    
-    printf("Dizinin ilk hali: ");
-    for (int i = 0; i < boyut; i++) printf("%d ", sayilar[i]);
+    // Binary Search için önce sıralama şarttır
+    baloncuk_sirala(A, N);
+    printf("Siralanmis dizi: ");
+    dizi_yazdir(A, N);
 
-    // 1. ADIM: Diziyi Sıralama
-    secmeliSiralama(sayilar, boyut);
+    printf("\nAranacak sayiyi giriniz: ");
+    scanf("%d", &aranan_sayi);
 
-    printf("\nDizi kucukten buyuge siralandi: ");
-    for (int i = 0; i < boyut; i++) printf("%d ", sayilar[i]);
-
-    // 2. ADIM: Kullanıcıdan Sayı Alıp Arama Yapma
-    printf("\n\nAramak istediginiz sayiyi giriniz: ");
-    scanf("%d", &arananSayi);
-
-    sonuc = ikiliArama(sayilar, 0, boyut - 1, arananSayi);
+    sonuc = ikili_arama(A, N, aranan_sayi);
 
     if (sonuc != -1)
-        printf("Tebrikler! %d sayisi dizinin %d. indisinde bulundu.\n", arananSayi, sonuc);
+        printf("Sayi bulundu! Dizinin %d. indeksinde yer aliyor.\n", sonuc);
     else
-        printf("Maalesef %d sayisi dizide bulunamadi.\n", arananSayi);
+        printf("Maalesef sayi dizide bulunamadi.\n");
 
     return 0;
 }
