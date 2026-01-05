@@ -1,4 +1,7 @@
 #include <stdio.h>
+// Muhammed Yusuf Silgu
+// 2420161086
+// BTK Akademi Sertifika Bağlantısı
 
 void dizi_yazdir(int dizi[], int BOYUT) {
     int i;
