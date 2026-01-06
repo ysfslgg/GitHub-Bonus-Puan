@@ -1,7 +1,7 @@
 #include <stdio.h>
 // Muhammed Yusuf Silgu
 // 2420161086
-// BTK Akademi Sertifika Bağlantısı
+// https://www.btkakademi.gov.tr/portal/certificate/validate?certificateId=MAZUEZMOob
 
 void dizi_yazdir(int dizi[], int BOYUT) {
     int i;
