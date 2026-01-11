@@ -34,7 +34,7 @@ int ikili_arama(int dizi[], int BOYUT, int aranan) {
     int sag = BOYUT - 1;
 
     while (sol <= sag) {
-        int orta = sol + (sag - sol) / 2; // Taşmayı önlemek için bu formül kullanılır
+        int orta = (sol + sag) / 2; // Mevcut aralığın orta indeksini hesaplar (Diziyi ikiye böler)
 
         // Sayı ortada mı?
         if (dizi[orta] == aranan)
